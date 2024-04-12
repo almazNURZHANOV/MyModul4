@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>рассказ про кота</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 26px;
+            color: rgb(0, 0, 0); 
+            background-color: rgb(255, 255, 255); 
+        }
+
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+        }
+
+
+        .highlight {
+            display: inline-block; 
+            position: relative; 
+        }
+
+        /* Показывать изображение при наведении на выделенное слово */
+        .highlight:hover img {
+            display: inline-block;
+        }
+
+        /* Скрыть изображение по умолчанию */
+        .highlight img {
+            display: none;
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            max-width: 100px; 
+            height: auto; 
+        }
+
+
+        .logo {
+            position: absolute; 
+            top: 10px; /
+            left: 10px; 
+            text-decoration: none; 
+            color: azure; 
+            display: flex; 
+            align-items: center;
+        }
+
+
+        .logo img {
+            width: 50px; 
+            height: 50px; /
+            margin-right: 10px; 
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="logo">
+        <img src="img/596d13617652515d5213b4cd 1.png" alt="Logo"> 
+        <span>Happy Animals</span> 
+    </a>
+
+    <div class="container">
+        <div id="text">
+            <p>Однажды толстенький <span class="highlight">КОТ</span> по имени Чебурашка решил исследовать далекий лес. Он выпрыгнул из окна своего дома, весело мурлыкая под звуки весеннего ветра.</p>
+            <p>Прогулявшись возле дома <span class="highlight">КОТ</span> решил путешествовать по лесу, играя с бабочками, пока не наткнулся на группу мышей, они устроили пикник прямо на маршруте <span class="highlight">КОТА</span>. <span class="highlight">КОТ</span>, весело замахав хвостом, начал охоту на мышей, но так и не кого не поймал, так-как <span class="highlight">КОТ</span> был толстый и неповоротливый.</p>
+        </div>
+    </div>
+
+    <!-- Подключение библиотеки jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Скрипт для отображения изображения при наведении на выделенное слово и его скрытия при уходе курсора -->
+    <script>
+        $(document).ready(function(){
+            var word = 'КОТ'; // Слово для выделения
+
+            // Обработчик события при наведении курсора на выделенное слово
+            $('#text').on('mouseenter', 'span.highlight', function(){
+                var text = $(this).text(); // Получаем текст элемента
+                var newText = text.replace(new RegExp(word, 'g'), '<span class="highlight">' + word + '<img src="IMG/4b2eb3663e112037d63ea091b45dfee5.jpg" alt="кот"></span>'); // Заменяем слово на выделенное слово с изображением кота
+                $(this).html(newText); // Заменяем содержимое элемента
+            });
+
+            // Обработчик события при уходе курсора с выделенного слова
+            $('#text').on('mouseleave', 'span.highlight', function(){
+                $(this).find('img').hide(); // Скрываем изображение
+            });
+        });
+    </script>
+</body>
+</html>

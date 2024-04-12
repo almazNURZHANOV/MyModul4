@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar Area Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #polar-area-chart {
+            margin: 0 auto; 
+        }
+    </style>
+</head>
+<body>
+    <!-- размер холста -->
+    <canvas id="polar-area-chart" width="1800" height="1100"></canvas>
+
+    <script>
+        // Получение контекста для рисования на холсте
+        var ctx = document.getElementById('polar-area-chart').getContext('2d');
+        // Создание объекта диаграммы
+        var polarAreaChart = new Chart(ctx, {
+            type: 'polarArea', // Указываем тип диаграммы
+            data: {
+                // Задаем метки для областей диаграммы
+                labels: ['США', 'Китай', 'Индия', 'Россия', 'Бразилия'],
+                datasets: [{
+                    label: 'Количество студентов на 10 000 человек населения',
+                    // Задаем данные для каждой области диаграммы
+                    data: [100, 130, 120, 100, 80],
+                    // Задаем цвета для каждой области диаграммы
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)', // США
+                        'rgba(54, 162, 235, 0.7)', // Китай
+                        'rgba(255, 206, 86, 0.7)', // Индия
+                        'rgba(75, 192, 192, 0.7)', // Россия
+                        'rgba(153, 102, 255, 0.7)' // Бразилия
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false, // Отключаем реакцию на изменение размера окна браузера
+                title: {
+                    display: true,
+                    text: 'Количество студентов учреждений высшего образования на 10 000 человек населения',
+                    fontSize: 20 
+                },
+                legend: {
+                    labels: {
+                        fontSize: 14 
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index];
+                            var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            return label + ': ' + value;
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
