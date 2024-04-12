@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нахождение корней квадратного уравнения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 60px;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Введите коэффициенты квадратного уравнения</h2>
+        <label for="a">a:</label>
+        <input type="number" id="a" min="-100" max="100" step="0.01">x<sup>2</sup> +
+        <label for="b">b:</label>
+        <input type="number" id="b" min="-100" max="100" step="0.01">x +
+        <label for="c">c:</label>
+        <input type="number" id="c" min="-100" max="100" step="0.01"> = 0
+        <button onclick="calculateRoots()">Найти корни</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Функция для вычисления корней квадратного уравнения
+        function calculateRoots() {
+            var a = parseFloat(document.getElementById("a").value); // Получаем коэффициент a
+            var b = parseFloat(document.getElementById("b").value); // Получаем коэффициент b
+            var c = parseFloat(document.getElementById("c").value); // Получаем коэффициент c
+            var D = b * b - 4 * a * c; // Вычисляем дискриминант
+            var roots = []; // массив для хранения корней
+
+            if (D > 0) { // Если дискриминант больше нуля
+                var x1 = (-b + Math.sqrt(D)) / (2 * a); // Вычисляем первый корень
+                var x2 = (-b - Math.sqrt(D)) / (2 * a); // Вычисляем второй корень
+                roots.push(x1, x2); // Добавляем корни в массив
+            } else if (D === 0) { // Если дискриминант равен нулю
+                var x = -b / (2 * a); // Вычисляем корень
+                roots.push(x); // Добавляем корень в массив
+            }
+
+            displayRoots(roots); // Отображаем корни
+        }
+
+        function displayRoots(roots) {
+            var resultDiv = document.getElementById("result");
+            if (roots.length === 0) {
+                resultDiv.textContent = "Уравнение не имеет действительных корней.";
+            } else {
+                resultDiv.textContent = "Действительные корни уравнения: " + roots.join(", ");
+            }
+        }
+    </script>
+</body>
+</html>
